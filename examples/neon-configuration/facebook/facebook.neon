@@ -1,0 +1,5 @@
+parameters:
+	facebook:
+		app_name: 'Facebook Connect for nette'
+		description: 'Vítr skoro nefouká a tak by se na první pohled mohlo zdát'
+		scope: 'email,user_likes'

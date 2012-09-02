@@ -1,0 +1,8 @@
+parameters:
+	facebook:
+		app_id: '124242314xxxxxxxxxx'
+		app_secret: 'ea417xxxxxxxxxxxxxxxxxxxxxxxxxx'
+		app_namespace: 'foo-bar'
+		canvas_url: 'https://www.example.com/my-application'
+		tab_url: null
+

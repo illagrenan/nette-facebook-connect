@@ -136,8 +136,6 @@ final class FacebookConnect extends \Facebook
             throw new \Nette\InvalidArgumentException($redirectUri . " is not valid URL.");
         }
 
-        // Debugger::dump($redirectUri);
-
         self::$redirectUri = $redirectUri;
     }
 

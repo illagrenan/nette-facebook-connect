@@ -1,0 +1,30 @@
+{block #content}
+    <h1>Nette FacebookConnect</h1>
+
+    <table>
+        <tr>
+            <td>
+                <a href="{link facebookLogin!}" class="btn btn-primary">
+                    Facebook login
+                </a>
+            </td>
+            <td>
+                <a href="{link facebookLogout!}" class="btn">
+                    Facebook logout
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    {ifset $user}
+        <hr>
+        <p>
+            <strong>
+                Ahoj {$user->getFirstName()}, jak se dnes měl
+                {if $user->getGender() == "female"}
+                a
+                {/if}        
+            </strong>
+        </p>
+    {/ifset}
+{/block}

@@ -1,0 +1,26 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+common:
+	includes:
+		- facebook/facebook.neon
+
+	# ...
+
+	services:
+		facebook:
+			class: \Illagrenan\Facebook\FacebookConnect([appId: %facebook.app_id%, secret: %facebook.app_secret%],@container)
+			setup:
+				- setHeaders()
+	# ...
+
+production < common:
+	includes:
+		- facebook/facebook_production.neon
+
+development < common:
+	includes:
+		- facebook/facebook_dev.neon

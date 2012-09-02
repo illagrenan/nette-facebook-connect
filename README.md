@@ -1,4 +1,4 @@
-# Facebook Connect for nette
+# Facebook Connect for nette (v0.0.1)
 
 ## 0. Changelog
 * 2.9.2012 - verze 0.0.1
