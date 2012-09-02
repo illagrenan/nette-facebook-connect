@@ -7,21 +7,24 @@ Stáhněte zdrojový kód do své nette aplikace buď pomocí GITu nebo jako ZIP
 Volitelně můžete doplněk nainstalovat [pomocí Composeru](http://doc.nette.org/cs/composer):
 
 #### `composer.json`
+```json
 	{
 		"minimum-stability": "dev",
 	    "require": {
 	        "illagrenan/nette-facebook-connect": "dev-master"
 	    }
 	}
-
-	$ php composer.phar install
+```
+```bash
+$ php composer.phar install
+```
 
 ## 2. Konfigurace
 1. Ve složce `app/config`, vytvořte nový adresář `facebook`
 2. Upravte `config.neon`, aby načítal konfigurační soubory podle aktuálního prostředí:
 
 #### `config.neon`
-
+```yml
 	common:
 		includes:
 			- facebook/facebook.neon
@@ -34,7 +37,7 @@ Volitelně můžete doplněk nainstalovat [pomocí Composeru](http://doc.nette.o
 		includes:
 			- facebook/facebook_dev.neon
 
-
+```
 Soubory `facebook.neon`, `facebook_production.neon` a `facebook_dev.neon` naleznete ve složce `install/config`.
 
 ### Popis konfiguračních souborů
@@ -78,7 +81,8 @@ Soubory `facebook.neon`, `facebook_production.neon` a `facebook_dev.neon` nalezn
 Doplněk zaregistrujte jako novou [službu](http://doc.nette.org/cs/configuring#toc-definice-sluzeb) v `config.neon` do [systémového kontejneru](http://doc.nette.org/cs/dependency-injection):
 
 #### `config.neon`
-	common:
+```yml
+common:
 		# ...
 		services:
 
@@ -91,12 +95,15 @@ Doplněk zaregistrujte jako novou [službu](http://doc.nette.org/cs/configuring#
 
 			# ...
 
+```
+
 `setHeaders()` - Pakliže používáte doplněk pro autorizaci klasické Facebook aplikace (tedy na apps.facebook.com), nastaví metoda hlavičky pro a) funkčnost cookies v IFRAMe pro IE, b) povolí vložení celého webu (aka aplikace) do IFRAMe. V případě, že vytváříte web s Facebook Connect - můžete volání metody zakomentovat.
 
 ## 3. Použití
 
 #### `HomepagePresenter.php`
-	<?php
+```php
+<?php
 
 	use Nette\Diagnostics\Debugger;
 
@@ -146,9 +153,10 @@ Doplněk zaregistrujte jako novou [službu](http://doc.nette.org/cs/configuring#
 	    }
 
 	}
+```
 
 #### `default.latte`
-
+```html
 	{block #content}
 	    <h1>Nette FacebookConnect</h1>
 
@@ -179,3 +187,4 @@ Doplněk zaregistrujte jako novou [službu](http://doc.nette.org/cs/configuring#
 	        </p>
 	    {/ifset}
 	{/block}
+```
