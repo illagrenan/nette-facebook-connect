@@ -1,5 +1,4 @@
 # Facebook Connect for nette
-> **Upozornění!** Doplněk ještě není připravený na ostré nasazení.
 
 ## 0. Changelog
 * 2.9.2012 - verze 0.0.1
