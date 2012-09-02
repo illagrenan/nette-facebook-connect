@@ -1,6 +1,40 @@
 # Facebook Connect for nette
 > **Upozornění!** Doplněk ještě není připravený na ostré nasazení.
 
+## 0. Představení
+### Funkce doplňku
+* Integrace [Facebook PHP SDK](https://github.com/facebook/facebook-php-sdk) do nette
+	* Verze Facebook SDK: 3.2.0
+	* Verze nette 2.0.5
+* Umožňuje přihlášení uživatelů pomocí Facebooku, pomocí doplňku tedy můžete vytvořit:
+	* Klasický web s Facebook Connectem
+	* Canvas aplikaci, běžící na apps.facebook.com
+	* _Aplikaci v záložce na Facebook stránce_ **(zatím nepodporováno)**
+
+### Co budete potřebovat?
+1. Developer účet na Facebooku, viz: [facebook.com/developers](https://www.facebook.com/developers)
+2. Pro produkční nasazení aplikace (tedy Facebook Connect webu se toto netýká) je **nezbytné vlastnit SSL certifikát** (aplikace běží pod `https://`) 
+
+### Zdroje informací a odkazy
+* [developers.facebook.com/docs/](https://developers.facebook.com/docs/) - Oficiální dokumentace
+* [developers.facebook.com/docs/guides/canvas/](https://developers.facebook.com/docs/guides/canvas/) - Představení aplikací na Facebooku
+* [developers.facebook.com/apps](https://developers.facebook.com/apps) - Založení a správa aplikací
+* [developers.facebook.com/docs/reference/php/](http://developers.facebook.com/docs/reference/php/) - PHP SDK Dokumentace
+* [developers.facebook.com/docs/appsonfacebook/tutorial/](https://developers.facebook.com/docs/appsonfacebook/tutorial/) - Tutoriál autoriace canvas aplikace
+
+<br>
+
+* [Zdroják.cz - Aplikace pro Facebook od základů - díl I.](http://www.zdrojak.cz/clanky/aplikace-pro-facebook-od-zakladu-dil-i/)
+* [Zdroják.cz - Aplikace pro Facebook, díl II. - autorizace](http://www.zdrojak.cz/clanky/aplikace-pro-facebook-dil-ii-autorizace/)
+
+*Disclaimer: Jsem spoluautor tutoriálů na Zdrojáku.*.
+
+### Podpora
+
+> Doplněk je v současné době funkční, nicméně na počátku svého vývoje. Počítejte tedy, prosím, s možnými bugy a změnami.
+
+Na nette fóru se nevyskytuji, nechť tedy jako podpora slouží GitHub a event. můj mail `info (a) vaclavdohnal.cz`.
+
 ## 1. Instalace
 Stáhněte zdrojový kód do své nette aplikace buď pomocí GITu nebo jako ZIP. Nezapomeňte, aby se k doplňku dostal [RobotLoader](http://doc.nette.org/cs/auto-loading).
 
@@ -18,6 +52,8 @@ Volitelně můžete doplněk nainstalovat [pomocí Composeru](http://doc.nette.o
 ```bash
 $ php composer.phar install
 ```
+
+> [Stránka doplňku na packagist.com](http://packagist.org/packages/illagrenan/nette-facebook-connect)
 
 ## 2. Konfigurace
 1. Ve složce `app/config`, vytvořte nový adresář `facebook`
@@ -188,3 +224,19 @@ common:
 	    {/ifset}
 	{/block}
 ```
+
+## 4. Licence
+Copyright (c) 2012, Václav Dohnal (http://www.vaclavdohnal.cz)
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Neither the name of the <ORGANIZATION> nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+##### Facebook PHP SDK (v.3.2.0)
+The Facebook Platform is a set of APIs that make your app more social.
+
+This repository contains the open source PHP SDK that allows you to access Facebook Platform from your PHP app. Except as otherwise noted, the Facebook PHP SDK is licensed under the Apache Licence, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html).
