@@ -1,5 +1,9 @@
 # Facebook Connect for nette (v0.0.1)
 
+* **Facebook SDK v3.2.0**
+* **nette v2.0.x** pro PHP 5.3 nebo 5.4 bez prefixů
+* Požadavky na PHP: přítomné **rozšíření cURL**
+
 ## 0. Changelog
 * 2.9.2012 - verze 0.0.1
 
@@ -16,8 +20,6 @@
 ## 1. Představení
 ### Funkce doplňku
 * Integrace [Facebook PHP SDK](https://github.com/facebook/facebook-php-sdk) do nette
-	* Verze Facebook SDK: 3.2.0
-	* Verze nette 2.0.5
 * Umožňuje přihlášení uživatelů pomocí Facebooku, pomocí doplňku tedy můžete vytvořit:
 	* Klasický web s Facebook Connectem
 	* Canvas aplikaci, běžící na apps.facebook.com
