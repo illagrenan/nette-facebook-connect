@@ -1,7 +1,20 @@
 # Facebook Connect for nette
 > **Upozornění!** Doplněk ještě není připravený na ostré nasazení.
 
-## 0. Představení
+## 0. Changelog
+* 2.9.2012 - verze 0.0.1
+
+### TODOs
+1. Podpora pro aplikace v záložce Facebook stránky
+2. `FacebookConnect::setRedirectUri()` a `IframeRedirect::redirectUrl()` by měly přijímat jako parametr nette zápis odkazů
+3. Komponenty pro vytváření dialogů (Wallpost, Request...) pomocí Facebook JS SDK (podobně jako [FBTools](http://addons.nette.org/cs/fb-tools)?)
+4. Vytvořit Facebook [autentikátor](http://doc.nette.org/cs/security#toc-vlastni-autentikator), aby bylo možné používat "nette-way" přihlašování uživatelů
+5. Značné vylepšení dokumentace.
+
+### Známé problémy
+1. Metoda `FacebookConnect::getLoginUrl` resp. její předek v knihovně generuje a do session ukládá CSFR token, kterým brání přihlášení. Pokud zavoláme `getLoginUrl()` na jedné stránce dvakrát a uživatel se pokusí přihlásit přes odkaz, který byl vygenerovaný jako první, autorizace selže. Knihovna totiž považuje vždy poslední vygenerovaný přihlašovací odkaz (resp. k němu přiřazený CSFR token) za validní.
+
+## 1. Představení
 ### Funkce doplňku
 * Integrace [Facebook PHP SDK](https://github.com/facebook/facebook-php-sdk) do nette
 	* Verze Facebook SDK: 3.2.0
@@ -35,7 +48,7 @@
 
 Na nette fóru se nevyskytuji, nechť tedy jako podpora slouží GitHub a event. můj mail `info (a) vaclavdohnal.cz`.
 
-## 1. Instalace
+## 2. Instalace
 Stáhněte zdrojový kód do své nette aplikace buď pomocí GITu nebo jako ZIP. Nezapomeňte, aby se k doplňku dostal [RobotLoader](http://doc.nette.org/cs/auto-loading).
 
 Volitelně můžete doplněk nainstalovat [pomocí Composeru](http://doc.nette.org/cs/composer):
@@ -55,7 +68,7 @@ $ php composer.phar install
 
 > [Stránka doplňku na packagist.com](http://packagist.org/packages/illagrenan/nette-facebook-connect)
 
-## 2. Konfigurace
+## 3. Konfigurace
 1. Ve složce `app/config`, vytvořte nový adresář `facebook`
 2. Upravte `config.neon`, aby načítal konfigurační soubory podle aktuálního prostředí:
 
@@ -112,7 +125,7 @@ Soubory `facebook.neon`, `facebook_production.neon` a `facebook_dev.neon` nalezn
 	</tr>
 </table>
 
-## 3. Registrace služby
+## 4. Registrace služby
 
 Doplněk zaregistrujte jako novou [službu](http://doc.nette.org/cs/configuring#toc-definice-sluzeb) v `config.neon` do [systémového kontejneru](http://doc.nette.org/cs/dependency-injection):
 
@@ -225,7 +238,7 @@ common:
 	{/block}
 ```
 
-## 4. Licence
+## 5. Licence
 Copyright (c) 2012, Václav Dohnal (http://www.vaclavdohnal.cz)
 All rights reserved.
 
