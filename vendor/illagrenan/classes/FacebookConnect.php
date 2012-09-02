@@ -141,11 +141,6 @@ final class FacebookConnect extends \Facebook
         self::$redirectUri = $redirectUri;
     }
 
-    public function foo()
-    {
-        
-    }
-
     /**
      * @return mixed
      */
