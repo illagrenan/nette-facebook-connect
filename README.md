@@ -1,2 +1,2 @@
-nette-facebook-connect
+Facebook Connect for nette
 ======================

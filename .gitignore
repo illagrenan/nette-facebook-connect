@@ -162,5 +162,8 @@ pip-log.txt
 # Mac crap
 .DS_Store
 
-vendor/
+vendor/*
+!vendor/illagrenan
 composer.lock
+/nbproject/
+/demo/

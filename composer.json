@@ -21,6 +21,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/facebook/facebook-php-sdk"
+        },
+        {
+        	"type": "vcs",
+        	"url": "https://github.com/nette/sandbox"
         }
     ],    
     "require": {
