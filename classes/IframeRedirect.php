@@ -19,7 +19,7 @@ final class IframeRedirect extends \Nette\Object
     }
 
     /**
-     * JavaScript Redirects between Facebook Pages
+     * Redirects using JavaScript.
      * @param string $url 
      * @return void
      */
