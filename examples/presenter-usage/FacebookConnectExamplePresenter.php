@@ -5,7 +5,7 @@ use Nette\Diagnostics\Debugger;
 /**
  * Homepage presenter.
  */
-class HomepagePresenter extends BasePresenter
+class FacebookConnectExamplePresenter extends BasePresenter
 {
 
     public function renderDefault()

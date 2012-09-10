@@ -29,25 +29,18 @@
 1. Developer účet na Facebooku, viz: [facebook.com/developers](https://www.facebook.com/developers)
 2. Pro produkční nasazení aplikace (tedy Facebook Connect webu se toto netýká) je **nezbytné vlastnit SSL certifikát** (aplikace běží pod `https://`) 
 
-### Zdroje informací a odkazy
+### Facebook PHP SDK - Dokumentace a zdroje
 * [developers.facebook.com/docs/](https://developers.facebook.com/docs/) - Oficiální dokumentace
 * [developers.facebook.com/docs/guides/canvas/](https://developers.facebook.com/docs/guides/canvas/) - Představení aplikací na Facebooku
 * [developers.facebook.com/apps](https://developers.facebook.com/apps) - Založení a správa aplikací
 * [developers.facebook.com/docs/reference/php/](http://developers.facebook.com/docs/reference/php/) - PHP SDK Dokumentace
 * [developers.facebook.com/docs/appsonfacebook/tutorial/](https://developers.facebook.com/docs/appsonfacebook/tutorial/) - Tutoriál autoriace canvas aplikace
 
-<br>
-
+#### Ostatní zdroje
 * [Zdroják.cz - Aplikace pro Facebook od základů - díl I.](http://www.zdrojak.cz/clanky/aplikace-pro-facebook-od-zakladu-dil-i/)
 * [Zdroják.cz - Aplikace pro Facebook, díl II. - autorizace](http://www.zdrojak.cz/clanky/aplikace-pro-facebook-dil-ii-autorizace/)
 
-*Disclaimer: Jsem spoluautor tutoriálů na Zdrojáku.*.
-
-### Podpora
-
-> Doplněk je v současné době funkční, nicméně na počátku svého vývoje. Počítejte tedy, prosím, s možnými bugy a změnami.
-
-Na nette fóru se nevyskytuji, nechť tedy jako podpora slouží GitHub a event. můj mail `info (a) vaclavdohnal.cz`.
+*Disclaimer: Jsem spoluautor tutoriálů na Zdrojáku.*
 
 ## 2. Instalace
 Stáhněte zdrojový kód do své nette aplikace buď pomocí GITu nebo jako ZIP. Nezapomeňte, aby se k doplňku dostal [RobotLoader](http://doc.nette.org/cs/auto-loading).
@@ -88,12 +81,22 @@ $ php composer.phar install
 			- facebook/facebook_dev.neon
 
 ```
-Soubory `facebook.neon`, `facebook_production.neon` a `facebook_dev.neon` naleznete ve složce `install/config`.
+Soubory `facebook.neon`, `facebook_production.neon` a `facebook_dev.neon` naleznete ve složce `examples/neon-configuration`.
 
 ### Popis konfiguračních souborů
 <table>
+	<thead>
+		<tr>
+			<th>Klíč</th>
+			<th>Typ</th>
+			<th>Popis</th>
+		</tr>
+
+	</thead>
+
 	<tr>
 		<th>app_name (string; nepovinné)</th>
+		<td></td>
 		<td>Název aplikace - použití pro requesty, wallpost apod.</td>
 	</tr>
 	<tr>
@@ -151,6 +154,8 @@ common:
 
 ## 3. Použití
 
+Kód naleznete v `examples/presenter-usage`.
+
 #### `HomepagePresenter.php`
 ```php
 <?php
@@ -206,6 +211,9 @@ common:
 ```
 
 #### `default.latte`
+
+Kód naleznete v `examples/latte-usage`.
+
 ```html
 	{block #content}
 	    <h1>Nette FacebookConnect</h1>
