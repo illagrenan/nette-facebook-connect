@@ -159,7 +159,7 @@ common:
 
 `setHeaders()` - Pakliže používáte doplněk pro autorizaci klasické Facebook aplikace (tedy na apps.facebook.com), nastaví metoda hlavičky pro a) funkčnost cookies v IFRAMe pro IE, b) povolí vložení celého webu (aka aplikace) do IFRAMe. V případě, že vytváříte web s Facebook Connect - můžete volání metody zakomentovat.
 
-## 3. Použití
+## 5. Použití
 
 Kód naleznete v `examples/presenter-usage`.
 
@@ -254,7 +254,7 @@ Kód naleznete v `examples/latte-usage`.
 	{/block}
 ```
 
-## 5. Licence
+## 6. Licence
 Copyright (c) 2012, Václav Dohnal (http://www.vaclavdohnal.cz)
 All rights reserved.
 
