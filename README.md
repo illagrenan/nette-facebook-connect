@@ -1,4 +1,4 @@
-# Facebook Connect for nette (v0.0.1)
+# Facebook Connect for nette (v0.0.1; [Diskuze na nette fóru](http://forum.nette.org/cs/12105-facebook-connect-pro-nette))
 
 * **Facebook SDK v3.2.0**
 * **nette v2.0.x** pro PHP 5.3 nebo 5.4 bez prefixů
@@ -12,7 +12,7 @@
 2. `FacebookConnect::setRedirectUri()` a `IframeRedirect::redirectUrl()` by měly přijímat jako parametr nette zápis odkazů
 3. Komponenty pro vytváření dialogů (Wallpost, Request...) pomocí Facebook JS SDK (podobně jako [FBTools](http://addons.nette.org/cs/fb-tools)?)
 4. Vytvořit Facebook [autentikátor](http://doc.nette.org/cs/security#toc-vlastni-autentikator), aby bylo možné používat "nette-way" přihlašování uživatelů
-5. Značné vylepšení dokumentace.
+5. Vylepšení dokumentace.
 
 ### Známé problémy
 1. Metoda `FacebookConnect::getLoginUrl` resp. její předek v knihovně generuje a do session ukládá CSFR token, kterým brání přihlášení. Pokud zavoláme `getLoginUrl()` na jedné stránce dvakrát a uživatel se pokusí přihlásit přes odkaz, který byl vygenerovaný jako první, autorizace selže. Knihovna totiž považuje vždy poslední vygenerovaný přihlašovací odkaz (resp. k němu přiřazený CSFR token) za validní.
