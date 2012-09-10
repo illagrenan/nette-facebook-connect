@@ -95,36 +95,43 @@ Soubory `facebook.neon`, `facebook_production.neon` a `facebook_dev.neon` nalezn
 	</thead>
 
 	<tr>
-		<th>app_name (string; nepovinné)</th>
-		<td></td>
-		<td>Název aplikace - použití pro requesty, wallpost apod.</td>
+		<th>app_name</th>
+		<td>string; nepovinné</td>
+		<td>Název aplikace pro použití v Requestech, Wallpostech atd.</td>
 	</tr>
 	<tr>
-		<th>description (string; nepovinné)</th>
-		<td>Popis aplikace - použití pro requesty, wallpost apod.</td>
+		<th>description</th>
+		<td>string; nepovinné</td>
+		<td>Popis aplikace pro stejné použití jako app_name. Tyto dvě položky aktuálně nejsou povinné, nicméně s postupným rozšířováním knihovny o generování Requestů a Wallpostů se budou hodit.</td>
 	</tr>
 	<tr>
-		<th>scope (string,string,...; nepovinné)</th>
+		<th>scope</th>
+		<td>string, string, string....; nepovinné</td>
 		<td>Extended permissions pro aplikaci, viz http://developers.facebook.com/docs/authentication/permissions/#extended_perms</td>
 	</tr>
 	<tr>
-		<th>app_id (int; povinné)</th>
+		<th>app_id</th>
+		<td>int; povinné</td>
 		<td>ID aplikace, které získáte po registraci na facebook.com/developers</td>
 	</tr>
 	<tr>
-		<th>app_secret (int; povinné)</th>
+		<th>app_secret</th>
+		<td>int; povinné</td>
 		<td>SECRET KEY aplikace, které získáte po registraci na facebook.com/developers</td>
 	</tr>
 	<tr>
-		<th>app_namespace (string; nepovinné)</th>
+		<th>app_namespace</th>
+		<td>string; nepovinné</td>
 		<td>V případě, že app_namespace nevyplníte, poběží doplněk v režimu Facebook Connect (místo Facebook App). Přihlašovací Facebook URL tedy nebude přesměrovávat na apps.facebook.com/app-namespace ale na www.my-canvas-page.com.</td>
 	</tr>
 	<tr>
-		<th>canvas_url (string, povinné)</th>
+		<th>canvas_url</th>
+		<td>string; povinné</td>
 		<td>URL vaší aplikace (webu).</td>
 	</tr>
 	<tr>
-		<th>tab_url (string, nepovinné)</th>
+		<th>tab_url</th>
+		<td>string; nepovinné</td>
 		<td>URL na aplikaci v případě, že je vložená na Facebook PAGE. Tato funkcionalita zatím není podporována.</td>
 	</tr>
 </table>
