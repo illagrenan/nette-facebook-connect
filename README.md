@@ -4,6 +4,8 @@
 * **nette v2.0.x** pro PHP 5.3 nebo 5.4 bez prefixů
 * Požadavky na PHP: přítomné **rozšíření cURL**
 
+* [Stránka doplňku na addons.nette.org](http://addons.nette.org/cs/facebook-connect-for-nette)
+
 ## 0. Changelog
 * 2.9.2012 - verze 0.0.1
 
