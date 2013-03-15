@@ -20,7 +20,7 @@
     "require": {
         "php": ">=5.3.0",
         "nette/nette": "@dev",
-        "facebook/php-sdk": "@dev"
+        "facebook/php-sdk": "dev-master"
     },
     "autoload": {
         "psr-0": {
