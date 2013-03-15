@@ -89,7 +89,7 @@ common:
 	facebookConnect:
 	    appName: 'Facebook Connect for nette'
 	    # appID a secret: https://developers.facebook.com/apps
-	    appId: '226215084183824'
+	    appId: '2262xxxxxx'
 	    secret: 'ea2cxxxxxxxxxxaa32'
 	    canvasUrl: 'http://myapp.local/path/to/your/app'
 	    description: 'Vítr skoro nefouká a tak by se na první pohled mohlo zdát'
