@@ -80,6 +80,8 @@ $ php composer.phar install
 
 ## 3. Konfigurace a registrace
 
+Kód naleznete v `examples/configure-and-load-extension`.
+
 #### `config.neon`
 ```yml
 common:
@@ -178,53 +180,52 @@ Kód naleznete v `examples/presenter-usage`.
 ```php
 <?php
 
-	use Nette\Diagnostics\Debugger;
+use Nette\Diagnostics\Debugger;
 
-	/**
-	 * Homepage presenter.
-	 */
-	class HomepagePresenter extends BasePresenter
-	{
+class HomepagePresenter extends BasePresenter
+{
 
-	    public function renderDefault()
-	    {
-	        // Autorizoval uživatel naši aplikaci?
-	        if ($this->facebookConnect->isLoggedIn() === FALSE)
-	        {
-	            // Volitelně můžeme změnit URL, na kterou bude uživatel z Facebooku navrácen
-	            $redirectUri = $this->link("//Homepage:default");
-	            $this->facebookConnect->setRedirectUri($redirectUri);
+    public function renderDefault()
+    {
+        // Autorizoval uživatel naši aplikaci?
+        if ($this->facebookConnect->isLoggedIn() === FALSE)
+        {
+            // Volitelně můžeme změnit URL, na kterou bude uživatel z Facebooku navrácen
+            $redirectUri = $this->link("//Homepage:default");
+            $this->facebookConnect->setRedirectUri($redirectUri);
 
 
-	            // Přihlásíme ho přesměrováním na Login_URL
-	            $this->facebookConnect->login();
-	        }
-	        else // Uživatel je přihlášený v aplikaci
-	        {
-	            /* @var $user Illagrenan\Facebook\FacebookUser */
-	            $user = $this->template->user = $this->facebookConnect->getFacebookUser();
+            // Přihlásíme ho přesměrováním na Login_URL
+            $this->facebookConnect->login();
+        }
+        else // Uživatel je přihlášený v aplikaci
+        {
+            /* @var $user Illagrenan\Facebook\FacebookUser */
+            $user                 = $this->facebookConnect->getFacebookUser();
+            $this->template->user = $user;
 
-	            Debugger::dump($user);
-	        }
-	    }
+            Debugger::dump($user);
+        }
+    }
 
-	    /**
-	     * Přesměruje uživatele na přihlašovací stránku aplikace (na facebook.com)
-	     */
-	    public function handleFacebookLogin()
-	    {
-	        $this->facebookConnect->login();
-	    }
-	    
-	    /**
-	     * Odhlásí uživatele z aplikace A z Facebooku
-	     */
-	    public function handleFacebookLogout()
-	    {
-	        $this->facebookConnect->logout();
-	    }
+    /**
+     * Přesměruje uživatele na přihlašovací stránku aplikace (na facebook.com)
+     */
+    public function handleFacebookLogin()
+    {
+        $this->facebookConnect->login();
+    }
 
-	}
+    /**
+     * Odhlásí uživatele z aplikace A z Facebooku
+     */
+    public function handleFacebookLogout()
+    {
+        $this->facebookConnect->logout();
+    }
+
+}
+?>
 ```
 
 #### `default.latte`
@@ -232,36 +233,23 @@ Kód naleznete v `examples/presenter-usage`.
 Kód naleznete v `examples/latte-usage`.
 
 ```html
-	{block #content}
-	    <h1>Nette FacebookConnect</h1>
+{block #content}
+    <h1>Nette FacebookConnect</h1>
 
-	    <table>
-	        <tr>
-	            <td>
-	                <a href="{link facebookLogin!}">
-	                    Facebook login
-	                </a>
-	            </td>
-	            <td>
-	                <a href="{link facebookLogout!}">
-	                    Facebook logout
-	                </a>
-	            </td>
-	        </tr>
-	    </table>
+    {ifset $user}
+    <p>
+        <strong>
+            Ahoj {$user->getFirstName()}, jak se dnes měl
+            {if $user->getGender() == \Illagrenan\Facebook\UserGender::FEMALE}a{/if}
+        </strong>
+    </p>
+    {/ifset}
 
-	    {ifset $user}
-	        <hr>
-	        <p>
-	            <strong>
-	                Ahoj {$user->getFirstName()}, jak se dnes měl
-	                {if $user->getGender() == "female"}
-	                a
-	                {/if}        
-	            </strong>
-	        </p>
-	    {/ifset}
-	{/block}
+    <ul>
+        <li><a href="{link facebookLogin!}">Přihlásit se do aplikace Facebookem</a></li>
+        <li><a href="{link facebookLogout!}">Odhlásit se z aplikace (ale i z Facebooku)</a></li>
+    </ul>
+{/block}
 ```
 
 ## 6. Licence
