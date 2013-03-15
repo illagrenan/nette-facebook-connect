@@ -16,9 +16,14 @@ final class FacebookConnect extends \Facebook
 {
 
     /**
-     * @var \Nette\DI\Container
+     * @var \Nette\Http\Response
      */
-    private $container;
+    private $httpResponse;
+
+    /**
+     * @var \Nette\Application\Application
+     */
+    private $application;
 
     /**
      * @var string 
@@ -48,33 +53,35 @@ final class FacebookConnect extends \Facebook
 
     /**
      * @param array $config
-     * @param \Nette\DI\Container $container
+     * @param \Nette\Application\Application $application
+     * @param \Nette\Http\Response $httpResponse
      */
-    public function __construct(array $config, \Nette\DI\Container $container)
+    public function __construct(array $config, \Nette\Application\Application $application, \Nette\Http\Response $httpResponse)
     {
         parent::__construct($config);
 
-        $this->config    = $config;
-        $this->container = $container;
+        $this->config       = $config;
+        $this->application  = $application;
+        $this->httpResponse = $httpResponse;
+        
+        $this->setHeaders();
     }
 
     /**
-     * Povolí zápis cookies do IFRAMe a pokud má aplikace appNamespace, povolí vložení aplikace do IFRAMe 
-     * @return void
+     * Povolí zápis cookies do IFRAMe a pokud má aplikace appNamespace, povolí vložení aplikace do IFRAMe
      */
-    public function setHeaders()
+    private function setHeaders()
     {
-
-        $this->container->httpResponse->addHeader('P3P', 'CP="CAO PSA OUR"');
+        $this->httpResponse->addHeader('P3P', 'CP="CAO PSA OUR"');
 
         if ($this->config["appNamespace"] !== FALSE)
         {
-            $this->container->httpResponse->setHeader('X-Frame-Options', NULL);
+            $this->httpResponse->setHeader('X-Frame-Options', NULL);
         }
     }
 
     /**
-     * @return void
+     * Přesměruje uživatele na Facebook.com, kde bude ověřeno jeho přihlášení
      */
     public function login()
     {
@@ -82,6 +89,9 @@ final class FacebookConnect extends \Facebook
         IframeRedirect::redirectUrl($loginUrl);
     }
 
+    /**
+     * Odhlásí uživatele z naší aplikace a z Facebook.com
+     */
     public function logout()
     {
         $logoutUrl = $this->getLogoutUrl();
@@ -111,6 +121,7 @@ final class FacebookConnect extends \Facebook
     }
 
     /**
+     * Vrátí absolutní adresu, na kterou je uživatel vrácen po Facebook autorizaci
      * @return string
      */
     public function getRedirectUri()
@@ -152,15 +163,42 @@ final class FacebookConnect extends \Facebook
      */
     public function setRedirectUri($redirectUri)
     {
-        if (FALSE === Validators::isUrl($redirectUri))
+        /* @var $currentPresenter \Nette\Application\UI\Presenter */
+        $currentPresenter = $this->application->getPresenter();
+        
+        $netteAbsoluteLinkPrexix = "//";
+
+        try
         {
-            throw new \Nette\InvalidArgumentException($redirectUri . " is not valid URL.");
+            if (\Nette\Utils\Strings::startsWith($redirectUri, "//"))
+            {
+                $netteAbsoluteLinkPrexix = "";
+            }
+            
+            $absoluteUri = $currentPresenter->link($netteAbsoluteLinkPrexix . $redirectUri);
+
+            if (\Nette\Utils\Strings::startsWith($absoluteUri, "error:"))
+            {
+                throw new \Nette\Application\UI\InvalidLinkException;
+            }
+        }
+        catch (\Nette\Application\UI\InvalidLinkException $exc)
+        {
+            if (Validators::isUrl($redirectUri) === TRUE)
+            {
+                $absoluteUri = $redirectUri;
+            }
+            else
+            {
+                throw new Exceptions\InvalidRedirectUriException("Given \"" . $redirectUri . "\" is not valid absolute URL or nette link.");
+            }
         }
 
-        $this->redirectUri = $redirectUri;
+        $this->redirectUri = $absoluteUri;
     }
 
     /**
+     * Vyvolá Facebook API požadavek a vrátí pole dat aktuálně přihlášeného uživatele
      * @return mixed
      */
     public function getMe()
@@ -169,6 +207,7 @@ final class FacebookConnect extends \Facebook
     }
 
     /**
+     * Je uživatel přihlášený?
      * @return boolean
      */
     public function isLoggedIn()
@@ -185,15 +224,16 @@ final class FacebookConnect extends \Facebook
     }
 
     /**
-     * @return \Illagrenan\Facebook\FacebookUser
-     * @throws NotConnectedException
+     * Vrátí objekt aktuálně přihlášeného uživatele
+     * @return FacebookUser
+     * @throws Exceptions\NotConnectedException pokud není uživatel přihlášen
      */
     public function getFacebookUser()
     {
 
         if (FALSE === $this->isLoggedIn())
         {
-            throw new NotConnectedException("Could not get user data. User is not connected.");
+            throw new Exceptions\NotConnectedException("Could not get user data. User is not connected.");
         }
 
         if ($this->loggedUser === NULL)

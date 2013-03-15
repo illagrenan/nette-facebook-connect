@@ -20,10 +20,10 @@ class FacebookConnectExtension extends Nette\Config\CompilerExtension
      */
     public $defaults = array(
         'appName'      => FALSE,
-        'description'   => FALSE,
-        'scope'         => FALSE,
+        'description'  => FALSE,
+        'scope'        => FALSE,
         'appId'        => FALSE,
-        'secret'    => FALSE,
+        'secret'       => FALSE,
         'appNamespace' => FALSE,
         'canvasUrl'    => FALSE,
         'tabUrl'       => FALSE
@@ -33,44 +33,15 @@ class FacebookConnectExtension extends Nette\Config\CompilerExtension
     {
         $builder = $this->getContainerBuilder();
         $config  = $this->getConfig($this->defaults);
-       
-        $client = $builder->addDefinition($this->prefix('client'))
-                ->setClass('\Illagrenan\Facebook\FacebookConnect', array(
-                    $config,
-                    '@container'
-                ))
-                ->addSetup('setHeaders');
 
+        $fbConnectParams = array(
+            $config,
+            '@application',
+            '@httpResponse'
+        );
 
-
-        return;
-
-        Nette\Diagnostics\Debugger::dump($config);
-        die();
-
-
-        $config = $this->getConfig(array(
-            'common.facebookConnect' => 'facebookConnect'
-        ));
-
-        $builder = $this->getContainerBuilder();
-
-        $api = $builder->addDefinition("fb")
-                ->setClass('\Illagrenan\Facebook\FacebookConnect', array(
-            array("appId"  => 123, "secret" => 123),
-            '@container'
-        ));
-
-        /*
-          if (isset($config['accessKey']) && isset($config['accessSecret']))
-          {
-          $api->addSetup('setOAuthToken', array(
-          $config['accessKey'],
-          $config['accessSecret']
-          ));
-          }
-
-         */
+        $builder->addDefinition($this->prefix('client'))
+                ->setClass('\Illagrenan\Facebook\FacebookConnect', $fbConnectParams);
     }
 
     /**

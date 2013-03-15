@@ -13,3 +13,8 @@ final class NotConnectedException extends \RuntimeException
 {
     
 }
+
+final class InvalidRedirectUriException extends \InvalidArgumentException
+{
+    
+}
