@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Tento soubor je součástí rozšíření "Nette Facebook Connect"
+ * @link https://github.com/illagrenan/nette-facebook-connect
+ * 
+ * Copyright (c) 2013 Václav Dohnal, http://www.vaclavdohnal.cz
+ */
+
 namespace Illagrenan\Facebook;
 
 use Nette\Utils\Validators;
@@ -16,22 +23,28 @@ final class FacebookConnect extends \Facebook
     /**
      * @var string 
      */
-    private static $redirectUri = NULL;
+    private $redirectUri;
 
     /**
      * @var \Illagrenan\Facebook\FacebookUser
      */
-    private static $loggedUser = NULL;
+    private $loggedUser;
 
     /**
      * @var string
      */
-    private static $FBAPPS_URL_PREFIX = "http://apps.facebook.com/";
+    private $FBAPPS_URL_PREFIX = "http://apps.facebook.com/";
 
     /**
      * @var string
      */
-    private static $FBAPPS_URL_SUFFIX = "/";
+    private $FBAPPS_URL_SUFFIX = "/";
+
+    /**
+     *
+     * @var array
+     */
+    private $config;
 
     /**
      * @param array $config
@@ -40,16 +53,24 @@ final class FacebookConnect extends \Facebook
     public function __construct(array $config, \Nette\DI\Container $container)
     {
         parent::__construct($config);
+
+        $this->config    = $config;
         $this->container = $container;
     }
 
     /**
+     * Povolí zápis cookies do IFRAMe a pokud má aplikace appNamespace, povolí vložení aplikace do IFRAMe 
      * @return void
      */
     public function setHeaders()
     {
+
         $this->container->httpResponse->addHeader('P3P', 'CP="CAO PSA OUR"');
-        $this->container->httpResponse->setHeader('X-Frame-Options', NULL);
+
+        if ($this->config["appNamespace"] !== FALSE)
+        {
+            $this->container->httpResponse->setHeader('X-Frame-Options', NULL);
+        }
     }
 
     /**
@@ -72,9 +93,9 @@ final class FacebookConnect extends \Facebook
      */
     private function getLoginParams()
     {
-        $params = array();
+        $params                 = array();
         $params["redirect_uri"] = $this->getRedirectUri();
-        $params["scope"]        = $this->container->parameters["facebook"]["scope"];
+        $params["scope"]        = $this->config["scope"];
         return $params;
     }
 
@@ -94,9 +115,9 @@ final class FacebookConnect extends \Facebook
      */
     public function getRedirectUri()
     {
-        if (NULL !== self::$redirectUri)
+        if (isset($this->redirectUri))
         {
-            return self::$redirectUri;
+            return $this->redirectUri;
         }
 
         if ($this->existsCanvasPage())
@@ -104,7 +125,7 @@ final class FacebookConnect extends \Facebook
             return $this->createCanvasPageUrl();
         }
 
-        return $this->container->parameters["facebook"]["canvas_url"];
+        return $this->config["canvasUrl"];
     }
 
     /**
@@ -112,7 +133,7 @@ final class FacebookConnect extends \Facebook
      */
     private function existsCanvasPage()
     {
-        return (bool) $this->container->parameters["facebook"]["app_namespace"];
+        return (bool) $this->config["appNamespace"];
     }
 
     /**
@@ -120,7 +141,7 @@ final class FacebookConnect extends \Facebook
      */
     private function createCanvasPageUrl()
     {
-        $appNamespace = $this->container->parameters["facebook"]["app_namespace"];
+        $appNamespace = $this->config["appNamespace"];
         return self::$FBAPPS_URL_PREFIX . $appNamespace . self::$FBAPPS_URL_SUFFIX;
     }
 
@@ -136,7 +157,7 @@ final class FacebookConnect extends \Facebook
             throw new \Nette\InvalidArgumentException($redirectUri . " is not valid URL.");
         }
 
-        self::$redirectUri = $redirectUri;
+        $this->redirectUri = $redirectUri;
     }
 
     /**
@@ -175,14 +196,14 @@ final class FacebookConnect extends \Facebook
             throw new NotConnectedException("Could not get user data. User is not connected.");
         }
 
-        if (self::$loggedUser === NULL)
+        if ($this->loggedUser === NULL)
         {
-            $me = $this->getMe();
-            return self::$loggedUser = $this->createNewUser($me);
+            $me               = $this->getMe();
+            return $this->loggedUser = $this->createNewUser($me);
         }
         else
         {
-            return self::$loggedUser;
+            return $this->loggedUser;
         }
     }
 
@@ -195,14 +216,7 @@ final class FacebookConnect extends \Facebook
         $me["email"] = isset($me["email"]) ? $me["email"] : NULL;
 
         return new FacebookUser(
-                        $me["id"],
-                        $me["first_name"],
-                        $me["last_name"],
-                        $me["link"],
-                        $me["username"],
-                        $me["gender"],
-                        $me["locale"],
-                        $me["email"]
+                $me["id"], $me["first_name"], $me["last_name"], $me["link"], $me["username"], $me["gender"], $me["locale"], $me["email"]
         );
     }
 

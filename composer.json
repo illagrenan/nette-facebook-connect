@@ -17,15 +17,14 @@
         "email": "support@vaclavdohnal.cz",
         "forum": "https://github.com/illagrenan/nette-facebook-connect/issues"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/facebook/facebook-php-sdk"
-        }
-    ],    
     "require": {
-        "php" : ">=5.3.0",
-        "nette/nette": "<=2.0.5",
+        "php": ">=5.3.0",
+        "nette/nette": "@dev",
         "facebook/php-sdk": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Illagrenan\\Facebook\\": "src/"
+        }
     }
 }

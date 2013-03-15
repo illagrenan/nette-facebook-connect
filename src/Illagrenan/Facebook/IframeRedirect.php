@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Tento soubor je součástí rozšíření "Nette Facebook Connect"
+ * @link https://github.com/illagrenan/nette-facebook-connect
+ * 
+ * Copyright (c) 2013 Václav Dohnal, http://www.vaclavdohnal.cz
+ */
+
 namespace Illagrenan\Facebook;
 
 use Nette\Utils\Validators;
@@ -11,7 +18,7 @@ final class IframeRedirect extends \Nette\Object
     /**
      * @var string
      */
-    private static $TEMPLATE_DIR = "../templates";
+    private static $TEMPLATE_DIR = "templates";
 
     private function __construct()
     {
