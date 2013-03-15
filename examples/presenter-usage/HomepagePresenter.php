@@ -2,43 +2,45 @@
 
 use Nette\Diagnostics\Debugger;
 
-/**
- * Homepage presenter.
- */
-class FacebookConnectExamplePresenter extends BasePresenter
+class HomepagePresenter extends BasePresenter
 {
 
     public function renderDefault()
     {
-        /* @var $fb Illagrenan\Facebook\FacebookConnect */
-        $fb = $this->context->facebook;
-
         // Autorizoval uživatel naši aplikaci?
-        if ($fb->isLoggedIn() === FALSE)
+        if ($this->facebookConnect->isLoggedIn() === FALSE)
         {
             // Volitelně můžeme změnit URL, na kterou bude uživatel z Facebooku navrácen
             $redirectUri = $this->link("//Homepage:default");
-            $fb->setRedirectUri($redirectUri);
+            $this->facebookConnect->setRedirectUri($redirectUri);
+
 
             // Přihlásíme ho přesměrováním na Login_URL
-            $fb->login();
+            $this->facebookConnect->login();
         }
         else // Uživatel je přihlášený v aplikaci
         {
             /* @var $user Illagrenan\Facebook\FacebookUser */
-            $user = $this->template->user = $fb->getFacebookUser();
+            $user                 = $this->template->user = $this->facebookConnect->getFacebookUser();
+
             Debugger::dump($user);
         }
     }
 
+    /**
+     * Přesměruje uživatele na přihlašovací stránku aplikace (na facebook.com)
+     */
     public function handleFacebookLogin()
     {
-        $this->context->facebook->login();
+        $this->facebookConnect->login();
     }
-    
+
+    /**
+     * Odhlásí uživatele z aplikace A z Facebooku
+     */
     public function handleFacebookLogout()
     {
-        $this->context->facebook->logout();
+        $this->facebookConnect->logout();
     }
 
 }

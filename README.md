@@ -1,23 +1,39 @@
-# Facebook Connect for nette (v0.0.1; [Diskuze na nette fóru](http://forum.nette.org/cs/12105-facebook-connect-pro-nette))
+# Facebook Connect for nette (v0.0.2; [Diskuze na nette fóru](http://forum.nette.org/cs/12105-facebook-connect-pro-nette))
 
+**Důležité!** Nová verze 0.0.2 (březen '13) **není zpětně kompatibilní** s 0.0.1, [předchozí funkční verze má na GITu Tag](https://github.com/illagrenan/nette-facebook-connect/tree/v0.0.1) a v Composeru ji použijete takto:
+
+#### `composer.json`
+```json
+	{
+	    "minimum-stability": "dev",
+	    "require": {
+	        "illagrenan/nette-facebook-connect": "0.0.1"
+	    }
+	}
+```
+
+* [Stránka doplňku na addons.nette.org](http://addons.nette.org/cs/facebook-connect-for-nette)
+
+
+## Závislosti
 * **Facebook SDK v3.2.0**
 * **nette v2.0.x** pro PHP 5.3 nebo 5.4 bez prefixů
 * Požadavky na PHP: přítomné **rozšíření cURL**
 
-* [Stránka doplňku na addons.nette.org](http://addons.nette.org/cs/facebook-connect-for-nette)
 
 ## 0. Changelog
+* 15.3.2013 - verze 0.0.2 (BC break!)
 * 2.9.2012 - verze 0.0.1
 
 ### TODOs
 1. Podpora pro aplikace v záložce Facebook stránky
 2. `FacebookConnect::setRedirectUri()` a `IframeRedirect::redirectUrl()` by měly přijímat jako parametr nette zápis odkazů
-3. Komponenty pro vytváření dialogů (Wallpost, Request...) pomocí Facebook JS SDK (podobně jako [FBTools](http://addons.nette.org/cs/fb-tools)?)
+3. <del>Komponenty pro vytváření dialogů (Wallpost, Request...) pomocí Facebook JS SDK (podobně jako [FBTools](http://addons.nette.org/cs/fb-tools)?)</del>
 4. Vytvořit Facebook [autentikátor](http://doc.nette.org/cs/security#toc-vlastni-autentikator), aby bylo možné používat "nette-way" přihlašování uživatelů
-5. Vylepšení dokumentace.
+5. <del>Vylepšení dokumentace.</del>
 
 ### Známé problémy
-1. Metoda `FacebookConnect::getLoginUrl` resp. její předek v knihovně generuje a do session ukládá CSFR token, kterým brání přihlášení. Pokud zavoláme `getLoginUrl()` na jedné stránce dvakrát a uživatel se pokusí přihlásit přes odkaz, který byl vygenerovaný jako první, autorizace selže. Knihovna totiž považuje vždy poslední vygenerovaný přihlašovací odkaz (resp. k němu přiřazený CSFR token) za validní.
+1. Metoda `FacebookConnect::getLoginUrl` resp. její předek v knihovně generuje a do session ukládá CSFR token, kterým zabezpečuje přihlášení. Pokud zavoláme `getLoginUrl()` na jedné stránce dvakrát a uživatel se pokusí přihlásit přes odkaz, který byl vygenerovaný jako první, autorizace selže. Knihovna totiž považuje vždy poslední vygenerovaný přihlašovací odkaz (resp. k němu přiřazený CSFR token) za validní.
 
 ## 1. Představení
 ### Funkce doplňku
@@ -45,14 +61,12 @@
 *Disclaimer: Jsem spoluautor tutoriálů na Zdrojáku.*
 
 ## 2. Instalace
-Stáhněte zdrojový kód do své nette aplikace buď pomocí GITu nebo jako ZIP. Nezapomeňte, aby se k doplňku dostal [RobotLoader](http://doc.nette.org/cs/auto-loading).
-
-Volitelně můžete doplněk nainstalovat [pomocí Composeru](http://doc.nette.org/cs/composer):
+Preferovaný způsob instalace [pomocí Composeru](http://doc.nette.org/cs/composer):
 
 #### `composer.json`
 ```json
 	{
-		"minimum-stability": "dev",
+	    "minimum-stability": "dev",
 	    "require": {
 	        "illagrenan/nette-facebook-connect": "dev-master"
 	    }
@@ -64,26 +78,44 @@ $ php composer.phar install
 
 > [Stránka doplňku na packagist.com](http://packagist.org/packages/illagrenan/nette-facebook-connect)
 
-## 3. Konfigurace
-1. Ve složce `app/config`, vytvořte nový adresář `facebook`
-2. Upravte `config.neon`, aby načítal konfigurační soubory podle aktuálního prostředí:
+## 3. Konfigurace a registrace
 
 #### `config.neon`
 ```yml
-	common:
-		includes:
-			- facebook/facebook.neon
-
-	production < common:
-		includes:
-			- facebook/facebook_production.neon
-
-	development < common:
-		includes:
-			- facebook/facebook_dev.neon
-
+facebookConnect:
+    appName: 'Facebook Connect for nette'
+    # appID a secret: https://developers.facebook.com/apps
+    appId: '226215084183824'
+    secret: 'ea2cxxxxxxxxxxaa32'
+    canvasUrl: 'http://myapp.local/path/to/your/app'
+    description: 'Vítr skoro nefouká a tak by se na první pohled mohlo zdát'
+    scope: 'email,user_likes'
 ```
-Soubory `facebook.neon`, `facebook_production.neon` a `facebook_dev.neon` naleznete ve složce `examples/neon-configuration`.
+
+#### `bootstrap.php`
+```php
+\Illagrenan\Facebook\DI\FacebookConnectExtension::register($configurator);
+```
+
+#### `*.Presenter.php`
+```php
+<?php
+abstract class BasePresenter extends \Nette\Application\UI\Presenter
+{     
+    /**
+     * @var \Illagrenan\Facebook\FacebookConnect
+     */
+    protected $facebookConnect;
+     
+    public function injectFacebookConnectClient(\Illagrenan\Facebook\FacebookConnect $facebookConnect)
+    {
+        
+        $this->facebookConnect = $facebookConnect;
+    }
+
+}
+?>
+```
 
 ### Popis konfiguračních souborů
 <table>
@@ -97,9 +129,29 @@ Soubory `facebook.neon`, `facebook_production.neon` a `facebook_dev.neon` nalezn
 	</thead>
 
 	<tr>
-		<th>app_name</th>
+		<th>appName</th>
 		<td>string; nepovinné</td>
 		<td>Název aplikace pro použití v Requestech, Wallpostech atd.</td>
+	</tr>
+	<tr>
+		<th>appId</th>
+		<td>int; povinné</td>
+		<td>ID aplikace, které získáte po registraci na facebook.com/developers</td>
+	</tr>
+	<tr>
+		<th>secret</th>
+		<td>int; povinné</td>
+		<td>SECRET KEY aplikace, které získáte po registraci na facebook.com/developers</td>
+	</tr>
+	<tr>
+		<th>canvasUrl</th>
+		<td>string; povinné</td>
+		<td>URL vaší aplikace (webu).</td>
+	</tr>
+	<tr>
+		<th>appNamespace</th>
+		<td>string; nepovinné</td>
+		<td>V případě, že app_namespace nevyplníte, poběží doplněk v režimu Facebook Connect (místo Facebook App). Přihlašovací Facebook URL tedy nebude přesměrovávat na apps.facebook.com/app-namespace ale na www.my-canvas-page.com.</td>
 	</tr>
 	<tr>
 		<th>description</th>
@@ -111,57 +163,9 @@ Soubory `facebook.neon`, `facebook_production.neon` a `facebook_dev.neon` nalezn
 		<td>string, string, string....; nepovinné</td>
 		<td>Extended permissions pro aplikaci, viz http://developers.facebook.com/docs/authentication/permissions/#extended_perms</td>
 	</tr>
-	<tr>
-		<th>app_id</th>
-		<td>int; povinné</td>
-		<td>ID aplikace, které získáte po registraci na facebook.com/developers</td>
-	</tr>
-	<tr>
-		<th>app_secret</th>
-		<td>int; povinné</td>
-		<td>SECRET KEY aplikace, které získáte po registraci na facebook.com/developers</td>
-	</tr>
-	<tr>
-		<th>app_namespace</th>
-		<td>string; nepovinné</td>
-		<td>V případě, že app_namespace nevyplníte, poběží doplněk v režimu Facebook Connect (místo Facebook App). Přihlašovací Facebook URL tedy nebude přesměrovávat na apps.facebook.com/app-namespace ale na www.my-canvas-page.com.</td>
-	</tr>
-	<tr>
-		<th>canvas_url</th>
-		<td>string; povinné</td>
-		<td>URL vaší aplikace (webu).</td>
-	</tr>
-	<tr>
-		<th>tab_url</th>
-		<td>string; nepovinné</td>
-		<td>URL na aplikaci v případě, že je vložená na Facebook PAGE. Tato funkcionalita zatím není podporována.</td>
-	</tr>
 </table>
 
-## 4. Registrace služby
-
-Doplněk zaregistrujte jako novou [službu](http://doc.nette.org/cs/configuring#toc-definice-sluzeb) v `config.neon` do [systémového kontejneru](http://doc.nette.org/cs/dependency-injection):
-
-#### `config.neon`
-```yml
-common:
-		# ...
-		services:
-
-			# ...
-
-			facebook:
-				class: \Illagrenan\Facebook\FacebookConnect([appId: %facebook.app_id%, secret: %facebook.app_secret%],@container)
-				setup:
-					- setHeaders()
-
-			# ...
-
-```
-
-`setHeaders()` - Pakliže používáte doplněk pro autorizaci klasické Facebook aplikace (tedy na apps.facebook.com), nastaví metoda hlavičky pro a) funkčnost cookies v IFRAMe pro IE, b) povolí vložení celého webu (aka aplikace) do IFRAMe. V případě, že vytváříte web s Facebook Connect - můžete volání metody zakomentovat.
-
-## 5. Použití
+## 4. Použití
 
 Kód naleznete v `examples/presenter-usage`.
 
@@ -179,23 +183,22 @@ Kód naleznete v `examples/presenter-usage`.
 
 	    public function renderDefault()
 	    {
-	        /* @var $fb Illagrenan\Facebook\FacebookConnect */
-	        $fb = $this->context->facebook;
-
 	        // Autorizoval uživatel naši aplikaci?
-	        if ($fb->isLoggedIn() === FALSE)
+	        if ($this->facebookConnect->isLoggedIn() === FALSE)
 	        {
 	            // Volitelně můžeme změnit URL, na kterou bude uživatel z Facebooku navrácen
 	            $redirectUri = $this->link("//Homepage:default");
-	            $fb->setRedirectUri($redirectUri);
+	            $this->facebookConnect->setRedirectUri($redirectUri);
+
 
 	            // Přihlásíme ho přesměrováním na Login_URL
-	            $fb->login();
+	            $this->facebookConnect->login();
 	        }
 	        else // Uživatel je přihlášený v aplikaci
 	        {
 	            /* @var $user Illagrenan\Facebook\FacebookUser */
-	            $user = $this->template->user = $fb->getFacebookUser();
+	            $user = $this->template->user = $this->facebookConnect->getFacebookUser();
+
 	            Debugger::dump($user);
 	        }
 	    }
@@ -205,7 +208,7 @@ Kód naleznete v `examples/presenter-usage`.
 	     */
 	    public function handleFacebookLogin()
 	    {
-	        $this->context->facebook->login();
+	        $this->facebookConnect->login();
 	    }
 	    
 	    /**
@@ -213,7 +216,7 @@ Kód naleznete v `examples/presenter-usage`.
 	     */
 	    public function handleFacebookLogout()
 	    {
-	        $this->context->facebook->logout();
+	        $this->facebookConnect->logout();
 	    }
 
 	}
