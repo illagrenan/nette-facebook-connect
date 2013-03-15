@@ -12,6 +12,11 @@ namespace Illagrenan\Facebook;
 use Nette\Utils\Validators;
 use Nette\Diagnostics\Debugger;
 
+/**
+ * Třída rozšíření.
+ * 
+ * @author Vašek Dohnal http://www.vaclavdohnal.cz
+ */
 final class FacebookConnect extends \Facebook
 {
 
@@ -63,7 +68,7 @@ final class FacebookConnect extends \Facebook
         $this->config       = $config;
         $this->application  = $application;
         $this->httpResponse = $httpResponse;
-        
+
         $this->setHeaders();
     }
 
@@ -157,6 +162,8 @@ final class FacebookConnect extends \Facebook
     }
 
     /**
+     * Nastaví URL na kterou bude uživatel z Facebook.com přesměrován
+     * Přijímá nette zápis odkazů (např.: Homepage:default) nebo absolutní URL
      * @param string $redirectUri
      * @throws \Nette\InvalidArgumentException
      * @return void
@@ -165,7 +172,7 @@ final class FacebookConnect extends \Facebook
     {
         /* @var $currentPresenter \Nette\Application\UI\Presenter */
         $currentPresenter = $this->application->getPresenter();
-        
+
         $netteAbsoluteLinkPrexix = "//";
 
         try
@@ -174,7 +181,7 @@ final class FacebookConnect extends \Facebook
             {
                 $netteAbsoluteLinkPrexix = "";
             }
-            
+
             $absoluteUri = $currentPresenter->link($netteAbsoluteLinkPrexix . $redirectUri);
 
             if (\Nette\Utils\Strings::startsWith($absoluteUri, "error:"))

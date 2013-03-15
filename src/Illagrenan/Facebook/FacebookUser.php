@@ -9,6 +9,11 @@
 
 namespace Illagrenan\Facebook;
 
+/**
+ * Data aktuálně přihlášeného a autorizovaného uživatele.
+ * 
+ * @author Vašek Dohnal http://www.vaclavdohnal.cz
+ */
 final class FacebookUser extends \Nette\Object
 {
 

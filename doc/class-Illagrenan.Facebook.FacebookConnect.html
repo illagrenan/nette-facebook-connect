@@ -7,7 +7,7 @@
 	<title>Class Illagrenan\Facebook\FacebookConnect | Facebook Connect for Nette</title>
 
 	<script type="text/javascript" src="resources/combined.js?3715972085"></script>
-	<script type="text/javascript" src="elementlist.js?67156074"></script>
+	<script type="text/javascript" src="elementlist.js?2926528111"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -90,6 +90,11 @@
 	<h1>Class FacebookConnect</h1>
 
 
+	<div class="description">
+	
+<p>Třída rozšíření.</p>
+
+	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
@@ -118,7 +123,10 @@ Facebook
 		<b>Namespace:</b> <a href="namespace-Illagrenan.html">Illagrenan</a>\<a href="namespace-Illagrenan.Facebook.html">Facebook</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Illagrenan.Facebook.FacebookConnect.html#15-217" title="Go to source code">Illagrenan/Facebook/FacebookConnect.php</a><br />
+				<b>Author:</b>
+				Vašek Dohnal <a
+href="http://www.vaclavdohnal.cz">http://www.vaclavdohnal.cz</a><br />
+		<b>Located at</b> <a href="source-class-Illagrenan.Facebook.FacebookConnect.html#15-270" title="Go to source code">Illagrenan/Facebook/FacebookConnect.php</a><br />
 	</div>
 
 
@@ -136,7 +144,7 @@ Facebook
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#49-59" title="Go to source code">__construct</a>( <span>array <var>$config</var></span>, <span>Nette\DI\Container <var>$container</var></span> )</code>
+		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#59-73" title="Go to source code">__construct</a>( <span>array <var>$config</var></span>, <span>Nette\Application\Application <var>$application</var></span>, <span>Nette\Http\Response <var>$httpResponse</var></span> )</code>
 
 		<div class="description short">
 			
@@ -150,38 +158,11 @@ Facebook
 				<div class="list"><dl>
 					<dt><var>$config</var></dt>
 					<dd><code>array</code><br>$config</dd>
-					<dt><var>$container</var></dt>
-					<dd><code>Nette\DI\Container</code><br>$container</dd>
+					<dt><var>$application</var></dt>
+					<dd><code>Nette\Application\Application</code><br>$application</dd>
+					<dt><var>$httpResponse</var></dt>
+					<dd><code>Nette\Http\Response</code><br>$httpResponse</dd>
 				</dl></div>
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="setHeaders" id="_setHeaders">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_setHeaders">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#61-68" title="Go to source code">setHeaders</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
 
 
 
@@ -201,14 +182,20 @@ Facebook
 
 		<td class="name"><div>
 		<a class="anchor" href="#_login">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#70-77" title="Go to source code">login</a>( )</code>
+		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#88-95" title="Go to source code">login</a>( )</code>
 
 		<div class="description short">
 			
+<p>Přesměruje uživatele na Facebook.com, kde bude ověřeno jeho
+přihlášení</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Přesměruje uživatele na Facebook.com, kde bude ověřeno jeho
+přihlášení</p>
+
 
 
 
@@ -230,14 +217,18 @@ Facebook
 
 		<td class="name"><div>
 		<a class="anchor" href="#_logout">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#79-83" title="Go to source code">logout</a>( )</code>
+		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#97-104" title="Go to source code">logout</a>( )</code>
 
 		<div class="description short">
 			
+<p>Odhlásí uživatele z naší aplikace a z Facebook.com</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Odhlásí uživatele z naší aplikace a z Facebook.com</p>
+
 
 
 
@@ -259,7 +250,7 @@ Facebook
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getLoginUrl">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#96-105" title="Go to source code">getLoginUrl</a>( <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#117-126" title="Go to source code">getLoginUrl</a>( <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -297,14 +288,20 @@ Facebook
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRedirectUri">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#107-123" title="Go to source code">getRedirectUri</a>( )</code>
+		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#128-145" title="Go to source code">getRedirectUri</a>( )</code>
 
 		<div class="description short">
 			
+<p>Vrátí absolutní adresu, na kterou je uživatel vrácen po Facebook
+autorizaci</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Vrátí absolutní adresu, na kterou je uživatel vrácen po Facebook
+autorizaci</p>
+
 
 
 
@@ -330,14 +327,22 @@ Facebook
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRedirectUri">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#142-155" title="Go to source code">setRedirectUri</a>( <span>string <var>$redirectUri</var></span> )</code>
+		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#164-205" title="Go to source code">setRedirectUri</a>( <span>string <var>$redirectUri</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Nastaví URL na kterou bude uživatel z Facebook.com přesměrován
+Přijímá nette zápis odkazů (např.: Homepage:default) nebo absolutní
+URL</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Nastaví URL na kterou bude uživatel z Facebook.com přesměrován
+Přijímá nette zápis odkazů (např.: Homepage:default) nebo absolutní
+URL</p>
+
 
 
 				<h4>Parameters</h4>
@@ -368,14 +373,20 @@ Facebook
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMe">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#157-163" title="Go to source code">getMe</a>( )</code>
+		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#207-214" title="Go to source code">getMe</a>( )</code>
 
 		<div class="description short">
 			
+<p>Vyvolá Facebook API požadavek a vrátí pole dat aktuálně
+přihlášeného uživatele</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Vyvolá Facebook API požadavek a vrátí pole dat aktuálně
+přihlášeného uživatele</p>
+
 
 
 
@@ -401,14 +412,18 @@ Facebook
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isLoggedIn">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#165-179" title="Go to source code">isLoggedIn</a>( )</code>
+		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#216-231" title="Go to source code">isLoggedIn</a>( )</code>
 
 		<div class="description short">
 			
+<p>Je uživatel přihlášený?</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Je uživatel přihlášený?</p>
+
 
 
 
@@ -434,14 +449,18 @@ Facebook
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFacebookUser">#</a>
-		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#181-202" title="Go to source code">getFacebookUser</a>( )</code>
+		<code><a href="source-class-Illagrenan.Facebook.FacebookConnect.html#233-255" title="Go to source code">getFacebookUser</a>( )</code>
 
 		<div class="description short">
 			
+<p>Vrátí objekt aktuálně přihlášeného uživatele</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Vrátí objekt aktuálně přihlášeného uživatele</p>
+
 
 
 
@@ -452,7 +471,7 @@ Facebook
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code>NotConnectedException</code><br />
+					<code><code><a href="class-Illagrenan.Facebook.Exceptions.NotConnectedException.html">Illagrenan\Facebook\Exceptions\NotConnectedException</a></code></code><br>pokud není uživatel přihlášen<br />
 				</div>
 
 

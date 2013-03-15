@@ -11,6 +11,7 @@ class HomepagePresenter extends BasePresenter
         if ($this->facebookConnect->isLoggedIn() === FALSE)
         {
             // Volitelně můžeme změnit URL, na kterou bude uživatel z Facebooku navrácen
+            // Přijímá buď nette zápis odkazů nebo absolutní URL
             $this->facebookConnect->setRedirectUri("Homepage:default");
 
 

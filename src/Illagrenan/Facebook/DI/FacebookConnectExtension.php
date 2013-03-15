@@ -12,6 +12,11 @@ namespace Illagrenan\Facebook\DI;
 use Nette;
 use Nette\Config\Configurator;
 
+/**
+ * Registrace nette rozšíření.
+ * 
+ * @author Vašek Dohnal http://www.vaclavdohnal.cz
+ */
 class FacebookConnectExtension extends Nette\Config\CompilerExtension
 {
 

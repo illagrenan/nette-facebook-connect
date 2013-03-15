@@ -12,6 +12,11 @@ namespace Illagrenan\Facebook;
 use Nette\Utils\Validators;
 use Nette\Templating\FileTemplate;
 
+/**
+ * Redirect JavaScriptem (naše aplikace běží na apps.facebook.com).
+ * 
+ * @author Vašek Dohnal http://www.vaclavdohnal.cz
+ */
 final class IframeRedirect extends \Nette\Object
 {
 
