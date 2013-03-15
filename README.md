@@ -82,14 +82,20 @@ $ php composer.phar install
 
 #### `config.neon`
 ```yml
-facebookConnect:
-    appName: 'Facebook Connect for nette'
-    # appID a secret: https://developers.facebook.com/apps
-    appId: '226215084183824'
-    secret: 'ea2cxxxxxxxxxxaa32'
-    canvasUrl: 'http://myapp.local/path/to/your/app'
-    description: 'Vítr skoro nefouká a tak by se na první pohled mohlo zdát'
-    scope: 'email,user_likes'
+common:
+
+	# ...
+
+	facebookConnect:
+	    appName: 'Facebook Connect for nette'
+	    # appID a secret: https://developers.facebook.com/apps
+	    appId: '226215084183824'
+	    secret: 'ea2cxxxxxxxxxxaa32'
+	    canvasUrl: 'http://myapp.local/path/to/your/app'
+	    description: 'Vítr skoro nefouká a tak by se na první pohled mohlo zdát'
+	    scope: 'email,user_likes'
+
+	# ...
 ```
 
 #### `bootstrap.php`
@@ -108,8 +114,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
     protected $facebookConnect;
      
     public function injectFacebookConnectClient(\Illagrenan\Facebook\FacebookConnect $facebookConnect)
-    {
-        
+    {        
         $this->facebookConnect = $facebookConnect;
     }
 
