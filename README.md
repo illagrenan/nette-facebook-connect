@@ -2,7 +2,7 @@
 
 **Důležité!** Nová verze 0.0.2 (březen '13) **není zpětně kompatibilní** s 0.0.1, [předchozí funkční verze má na GITu Tag](https://github.com/illagrenan/nette-facebook-connect/tree/v0.0.1) a v Composeru ji použijete takto:
 
-#### `composer.json` POUZE VERZE 0.0.1!
+#### `composer.json` POUZE původní VERZE 0.0.1!
 ```json
 	{
 	    "minimum-stability": "dev",
@@ -15,9 +15,8 @@
 #### **Doporučuji:** `composer.json` pro `dev-master`
 ```json
 	{
-	    "minimum-stability": "dev",
 	    "require": {
-	        "illagrenan/nette-facebook-connect": "0.0.1"
+	        "illagrenan/nette-facebook-connect": "dev-master"
 	    }
 	}
 ```
