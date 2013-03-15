@@ -1,0 +1,31 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+common:
+
+    # ....
+
+production < common:
+
+    # .... 
+
+development < common:
+
+    # ....
+
+    facebookConnect:
+        appName: 'Facebook Connect for nette'
+        appId: '226xxxxx4'
+        secret: 'ea2xxxxxxa32'
+        canvasUrl: 'http://myapp.local/path/to/my/app'
+        description: 'Vítr skoro nefouká a tak by se na první pohled mohlo zdát'
+        scope: 'email,user_likes'
+
+    # ....    
+
+test < common:
+
+    # .... 

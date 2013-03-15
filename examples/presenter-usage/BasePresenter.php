@@ -1,7 +1,5 @@
 <?php
 
-use Nette\Diagnostics\Debugger;
-
 abstract class BasePresenter extends \Nette\Application\UI\Presenter
 {
 

@@ -21,7 +21,8 @@ class HomepagePresenter extends BasePresenter
         else // Uživatel je přihlášený v aplikaci
         {
             /* @var $user Illagrenan\Facebook\FacebookUser */
-            $user                 = $this->template->user = $this->facebookConnect->getFacebookUser();
+            $user                 = $this->facebookConnect->getFacebookUser();
+            $this->template->user = $user;
 
             Debugger::dump($user);
         }

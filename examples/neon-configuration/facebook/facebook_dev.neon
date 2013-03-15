@@ -1,8 +1,0 @@
-parameters:
-	facebook:
-		app_id: '124242314xxxxxxxxxx'
-		app_secret: 'ea417xxxxxxxxxxxxxxxxxxxxxxxxxx'
-		app_namespace: 'foo-bar-local'
-		canvas_url: 'http://localhost/nette-facebook-connect/www/'
-		tab_url: null
-
