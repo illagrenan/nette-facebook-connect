@@ -66,7 +66,6 @@ Preferovaný způsob instalace [pomocí Composeru](http://doc.nette.org/cs/compo
 #### `composer.json`
 ```json
 	{
-	    "minimum-stability": "dev",
 	    "require": {
 	        "illagrenan/nette-facebook-connect": "dev-master"
 	    }
