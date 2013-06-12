@@ -1,18 +1,5 @@
-# Facebook Connect for nette (v0.0.2; [Diskuze na nette fóru](http://forum.nette.org/cs/12105-facebook-connect-pro-nette))
+# Facebook Connect pro nette
 
-**Důležité!** Nová verze 0.0.2 (březen '13) **není zpětně kompatibilní** s 0.0.1, [předchozí funkční verze má na GITu Tag](https://github.com/illagrenan/nette-facebook-connect/tree/v0.0.1) a v Composeru ji použijete takto:
-
-#### `composer.json` POUZE původní VERZE 0.0.1!
-```json
-	{
-	    "minimum-stability": "dev",
-	    "require": {
-	        "illagrenan/nette-facebook-connect": "0.0.1"
-	    }
-	}
-```
-
-#### **Doporučuji:** `composer.json` pro `dev-master`
 ```json
 	{
 	    "require": {
@@ -22,6 +9,7 @@
 ```
 
 * [Stránka doplňku na addons.nette.org](http://addons.nette.org/cs/facebook-connect-for-nette)
+* [Diskuze na forum.nette.org](http://forum.nette.org/cs/12105-facebook-connect-pro-nette)
 
 
 ## Závislosti
@@ -113,7 +101,7 @@ common:
 \Illagrenan\Facebook\DI\FacebookConnectExtension::register($configurator);
 ```
 
-#### `*.Presenter.php`
+#### `BasePresenter.php` - získání služby
 ```php
 <?php
 abstract class BasePresenter extends \Nette\Application\UI\Presenter
