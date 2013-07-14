@@ -249,7 +249,7 @@ Kód naleznete v `examples/latte-usage`.
 ```
 
 ## 6. Licence
-Copyright (c) 2012, Václav Dohnal (http://www.vaclavdohnal.cz)
+Copyright (c) 2013, Václav Dohnal (http://www.vaclavdohnal.cz)
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
