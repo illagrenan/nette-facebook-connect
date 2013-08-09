@@ -19,15 +19,14 @@
 
 
 ## 0. Changelog
+* 9.8.2013 - Přidána ukázka Wallpostu
 * 15.3.2013 - verze 0.0.2 (BC break!)
 * 2.9.2012 - verze 0.0.1
 
 ### TODOs
 1. Podpora pro aplikace v záložce Facebook stránky
 2. `FacebookConnect::setRedirectUri()` a `IframeRedirect::redirectUrl()` by měly přijímat jako parametr nette zápis odkazů
-3. <del>Komponenty pro vytváření dialogů (Wallpost, Request...) pomocí Facebook JS SDK (podobně jako [FBTools](http://addons.nette.org/cs/fb-tools)?)</del>
-4. Vytvořit Facebook [autentikátor](http://doc.nette.org/cs/security#toc-vlastni-autentikator), aby bylo možné používat "nette-way" přihlašování uživatelů
-5. <del>Vylepšení dokumentace.</del>
+3. Vytvořit Facebook [autentikátor](http://doc.nette.org/cs/security#toc-vlastni-autentikator), aby bylo možné používat "nette-way" přihlašování uživatelů
 
 ### Známé problémy
 1. Metoda `FacebookConnect::getLoginUrl` resp. její předek v knihovně generuje a do session ukládá CSFR token, kterým zabezpečuje přihlášení. Pokud zavoláme `getLoginUrl()` na jedné stránce dvakrát a uživatel se pokusí přihlásit přes odkaz, který byl vygenerovaný jako první, autorizace selže. Knihovna totiž považuje vždy poslední vygenerovaný přihlašovací odkaz (resp. k němu přiřazený CSFR token) za validní.
