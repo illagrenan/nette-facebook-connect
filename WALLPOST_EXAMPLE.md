@@ -44,4 +44,4 @@ array(1) {
 
 Výsledek na Facebooku:
 
-![](https://raw.github.com/illagrenan/nette-facebook-connect/master/images/wallpost_example.png)
+![](https://raw.github.com/illagrenan/nette-facebook-connect/master/images/wallpost_test.png)
