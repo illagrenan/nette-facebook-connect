@@ -19,7 +19,7 @@
 
 
 ## 0. Changelog
-* 9.8.2013 - Přidána ukázka Wallpostu
+* 9.8.2013 - Přidána [ukázka Wallpostu](WALLPOST_EXAMPLE.md)
 * 15.3.2013 - verze 0.0.2 (BC break!)
 * 2.9.2012 - verze 0.0.1
 
